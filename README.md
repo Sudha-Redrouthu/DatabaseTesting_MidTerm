@@ -142,3 +142,36 @@ CREATE TABLE Sales (
     FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID),
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
+
+CREATE TABLE Reviews (
+    ReviewID INT PRIMARY KEY,
+    BookID INT,
+    AuthorID INT,
+    CustomerID INT,
+    PublisherID INT,
+    ReviewComment TEXT,
+    Ratings INT CHECK (Ratings BETWEEN 1 AND 5),
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (PublisherID) REFERENCES Publishers(PublisherID)
+);
+
+
+CREATE TABLE Inventory (
+    OrderID INT PRIMARY KEY,
+    OrderDate DATE NOT NULL,
+    OrderCost DECIMAL(10, 2) NOT NULL,
+    OrderDetails TEXT,
+    ReceivedDate DATE
+);
+
+
+CREATE TABLE Feedback (
+    FeedbackID INT PRIMARY KEY,
+    CustomerID INT,
+    FeedbackDetails TEXT,
+    FeedbackType ENUM('Complaint', 'Suggestion', 'Praise') NOT NULL,
+    FeedbackDate DATE NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
