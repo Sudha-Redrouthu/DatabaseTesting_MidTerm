@@ -79,7 +79,7 @@
 | review_id    | INT PRIMARY KEY| Unique ID for each review  |
 | customer_id  | INT            | Customer ID (FK)           |
 | book_id      | INT            | Book ID (FK)               |
-| rating       | INT CHECK (rating BETWEEN 1 AND 5)| Rating (1 to 5)|
+| rating       | INT | Rating (1 to 5)|
 | comment      | TEXT           | Review comment             |
 | review_date  | DATE           | Date of the review         |
 | votes        | INT            | Number of helpful votes    |
