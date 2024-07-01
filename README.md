@@ -26,19 +26,21 @@
 | publisher_name         | VARCHAR(50)   | Name of the publisher      |
 | publisher_address      | VARCHAR(100)   | Publisher's address        |
 
-### Book Table
+### Books Table
 
-| Column       | Data Type      | Description                |
-|--------------|----------------|----------------------------|
-| book_id      | INT PRIMARY KEY| Unique ID for each book    |
-| book_name      | VARCHAR(100)   | Title of the book          |
-| genre_id     | INT            | Genre ID (FK)              |
-| publish_date | DATE           | Publication date           |
-| author_id    | INT            | Author ID (FK)             |
-| publisher_id | INT            | Publisher ID (FK)          |
-| book_format       | VARCHAR(20)    | Format (Physical, eBook, Audio) |
-| book_price        | DECIMAL(10,2)  | Price of the book          |
-| ISBN         | VARCHAR(20)    | ISBN number                |
+| Attribute           | Type                         | Description                                      |
+|---------------------|------------------------------|--------------------------------------------------|
+| BookID              | INT                          | Primary key for identifying books.               |
+| BookName            | VARCHAR(50)                  | The name of the book.                            |
+| BookGenre           | VARCHAR(50)                  | Genre of the book (e.g.,     Mystery, Romance).  |
+| BookPrice           | DECIMAL(10, 2)               | Price of the book.                               |
+| BookQuantity        | INT                          | Number of copies available in inventory.         |
+| BookNoOfReviews     | INT                          | Number of reviews received for the book          |
+| BookPublishedDate   | DATE                         | Date when the book was published.                |
+| BookNoOfSales       | INT                          | Number of sales for the book (default is 0).     |
+| BookType            | VARCHAR(10)                  | Type of book                                     |
+| AuthorID            | INT                          | Foreign key referencing the Authors table.       |
+| PublisherID         | INT                          | Foreign key referencing the Publishers table.    |
 
 ### Customer Table
 
