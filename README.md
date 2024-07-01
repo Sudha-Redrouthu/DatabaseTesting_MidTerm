@@ -42,13 +42,13 @@
 |---------------------|------------------------------|--------------------------------------------------|
 | BookID              | INT                          | Primary key for identifying books.               |
 | BookName            | VARCHAR(50)                  | The name of the book.                            |
-| BookGenre           | VARCHAR(50)                  | Genre of the book (e.g.,     Mystery, Romance).  |
-| BookPrice           | DECIMAL(10, 2)               | Price of the book.                               |
+| BookGenre           | VARCHAR(50)                  | Genre of the book                                |
+| BookPrice           | DECIMAL(10, 2)               | Price of the book                                |
 | BookQuantity        | INT                          | Number of copies available in inventory.         |
 | BookNoOfReviews     | INT                          | Number of reviews received for the book          |
 | BookPublishedDate   | DATE                         | Date when the book was published.                |
-| BookNoOfSales       | INT                          | Number of sales for the book (default is 0).     |
-| BookType            | VARCHAR(10)                  | Type of book                                     |
+| BookNoOfSales       | INT                          | Number of sales for the book                     |
+| BookType            | VARCHAR(10)                  | Type of book(Pysical, Ebook..etc)                |
 | AuthorID            | INT                          | Foreign key referencing the Authors table.       |
 | PublisherID         | INT                          | Foreign key referencing the Publishers table.    |
 
@@ -103,9 +103,27 @@
 | AuthorID        | INT             | Foreign key referencing the Authors table.       |
 | CustomerID      | INT             | Foreign key referencing the Customers table.     |
 | PublisherID     | INT             | Foreign key referencing the Publishers table.    |
-| ReviewComment   | TEXT            | Comments or feedback provided by the reviewer.   |
-| Ratings         | INT             | Ratings given by the reviewer                    |
+| ReviewComment   | TEXT            | Comments provided by the reviewer.               |
+| Ratings         | INT             | Ratings given by the customers                   |
 
+### Inventory Table
+
+| Attribute       | Type            | Description                                      |
+|-----------------|-----------------|--------------------------------------------------|
+| OrderID         | INT             | Primary key for identifying orders.              |
+| OrderDate       | DATE            | Date when the order was placed.                  |
+| OrderCost       | DECIMAL(10, 2)  | Cost of the order.                               |
+| OrderDetails    | TEXT            | Details of the order.                            |
+
+## Feedback Table
+
+| Column         | Data Type      | Description                                       |
+|----------------|----------------|------------------------------------------------   |
+| FeedbackID     | INT PRIMARY KEY| Unique ID for each feedback                       |
+| CustomerID     | INT            | ID of the customer (FK) referencing customer Table|
+| FeedbackDetails| TEXT           | Details of the feedback                           |
+| FeedbackType   | VARCHAR(255)   | Type of feedback (Complaint, Suggestion, Request) |
+| FeedbackDate   | DATE           | Date of the feedback                              |
 
 CREATE TABLE Books (
     BookID INT PRIMARY KEY,
