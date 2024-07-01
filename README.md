@@ -213,14 +213,12 @@ CREATE TABLE Feedback (
     FeedbackDate DATE NOT NULL,
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
-
-
-
+```
 ## DDL for Reviews Table
 
 ### Create
 
-sql
+```sql
 CREATE TABLE Reviews (
     ReviewID INT PRIMARY KEY,
     BookID INT,
@@ -234,16 +232,33 @@ CREATE TABLE Reviews (
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
     FOREIGN KEY (PublisherID) REFERENCES Publishers(PublisherID)
 );
-
+```
 ### Alter
-sql
+```sql
 ALTER TABLE Reviews ADD COLUMN ReviewTitle VARCHAR(100);
-
+```
 ### Alter
-sql
+```sql
 DROP TABLE Reviews;
-
+```
 ### Truncate
-sql
+```sql
 TRUNCATE TABLE Reviews;
-
+```
+## DML for Reviews Table
+### Insert
+```sql
+INSERT INTO Reviews (ReviewID, BookID, AuthorID, CustomerID, PublisherID, ReviewComment, Ratings) VALUES (1, 2, 3, 4, 5, 'Good', 5);
+```
+### Select
+```sql
+SELECT * FROM Reviews WHERE ReviewID = 1;
+```
+### Update
+```sql
+UPDATE Reviews SET ReviewComment = 'Excellent', Ratings = 4 WHERE ReviewID = 1;
+```
+### Delete
+```sql
+DELETE FROM Reviews WHERE ReviewID = 1;
+```
