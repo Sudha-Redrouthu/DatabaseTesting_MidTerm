@@ -80,46 +80,31 @@
 | PublisherName        | VARCHAR(50)     | Name of the publisher.                           |
 | PublisherContactInfo | VARCHAR(100)    | Contact information for the publisher.           |
 
-### Genre Table
+### Sales Table
 
-| Column    | Data Type      | Description                |
-|-----------|----------------|----------------------------|
-| genre_id  | INT PRIMARY KEY| Unique ID for each genre   |
-| genre_name      | VARCHAR(50)   | Name of the genre          |
-| genre_description | TEXT         | Genre description          |
-
-### Order Table
-
-| Column           | Data Type      | Description                |
-|------------------|----------------|----------------------------|
-| order_id         | INT PRIMARY KEY| Unique ID for each order   |
-| customer_id      | INT            | Customer ID (FK)           |
-| order_date       | DATE           | Date of the order          |
-| total_amount     | DECIMAL(10,2)  | Total order amount         |
-| shipping_address | VARCHAR(255)   | Shipping address           |
-| order_status     | VARCHAR(50)    | Status of the order        |
-
-### Items_Purchased Table
-
-| Column           | Data Type      | Description                |
-|------------------|----------------|----------------------------|
-| purchased_item_id| INT PRIMARY KEY| Unique ID for each purchase|
-| order_id         | INT            | Order ID (FK)              |
-| book_id          | INT            | Book ID (FK)               |
-| book_quantity         | INT            | Quantity purchased         |
-| book_price            | NUMERIC(10,2)  | Price of the item          |
+| Attribute       | Type            | Description                                      |
+|-----------------|-----------------|--------------------------------------------------|
+| SaleID          | INT             | Primary key for identifying sales transactions.  |
+| BookID          | INT             | Foreign key referencing the Books table.         |
+| BookGenre       | VARCHAR(50)     | Genre of the book sold.                          |
+| PublisherID     | INT             | Foreign key referencing the Publishers table.    |
+| AuthorID        | INT             | Foreign key referencing the Authors table.       |
+| QuantitySold    | INT             | Number of copies sold.                           |
+| TotalAmount     | DECIMAL(10, 2)  | Total amount generated from the sale.            |
+| CustomerID      | INT             | Foreign key referencing the Customers table.     |
+| SaleDate        | DATE            | Date of the sale.                                |
 
 ### Reviews Table
 
-| Column       | Data Type      | Description                |
-|--------------|----------------|----------------------------|
-| review_id    | INT PRIMARY KEY| Unique ID for each review  |
-| customer_id  | INT            | Customer ID (FK)           |
-| book_id      | INT            | Book ID (FK)               |
-| rating       | INT | Rating (1 to 5)|
-| comment      | TEXT           | Review comment             |
-| review_date  | DATE           | Date of the review         |
-| votes        | INT            | Number of helpful votes    |
+| Attribute       | Type            | Description                                      |
+|-----------------|-----------------|--------------------------------------------------|
+| ReviewID        | INT             | Primary key for identifying reviews.             |
+| BookID          | INT             | Foreign key referencing the Books table.         |
+| AuthorID        | INT             | Foreign key referencing the Authors table.       |
+| CustomerID      | INT             | Foreign key referencing the Customers table.     |
+| PublisherID     | INT             | Foreign key referencing the Publishers table.    |
+| ReviewComment   | TEXT            | Comments or feedback provided by the reviewer.   |
+| Ratings         | INT             | Ratings given by the reviewer                    |
 
 
 CREATE TABLE Books (
