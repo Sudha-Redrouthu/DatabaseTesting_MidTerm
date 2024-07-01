@@ -214,3 +214,36 @@ CREATE TABLE Feedback (
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
+
+
+## DDL for Reviews Table
+
+### Create
+
+sql
+CREATE TABLE Reviews (
+    ReviewID INT PRIMARY KEY,
+    BookID INT,
+    AuthorID INT,
+    CustomerID INT,
+    PublisherID INT,
+    ReviewComment TEXT,
+    Ratings INT CHECK (Ratings BETWEEN 1 AND 5),
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (PublisherID) REFERENCES Publishers(PublisherID)
+);
+
+### Alter
+sql
+ALTER TABLE Reviews ADD COLUMN ReviewTitle VARCHAR(100);
+
+### Alter
+sql
+DROP TABLE Reviews;
+
+### Truncate
+sql
+TRUNCATE TABLE Reviews;
+
