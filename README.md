@@ -1,8 +1,8 @@
-# DatabaseTesting_MidTerm
+#  SENG8071- DatabaseTesting- Midterm Assignment
 
 # Team Responsibilities
 
-## Member 1 karthik: SQL Implementation
+## Member 1- karthik: SQL Implementation
 
 *Tasks:*
 - SQL Implementation
@@ -23,19 +23,17 @@
   - Determining the most popular genre by sales
   - Retrieving the 10 most recent customer reviews
   
-## Member 3 Mohan: Developing SQL Code for Database Creation (DDL), Writing DML Statements and Documentation
+## Member 3- Mohan: Developing SQL Code for Database Creation (DDL), Writing DML Statements and Documentation
 
 *Tasks:*
 - Develop SQL code for DDL
 - Write DML statements
 - Write the markdown document
 - Organize the document with clear headers
-- Create tables in markdown format to display:
-  - Database tables and their attributes
-  - Data types and attribute descriptions
+- Create tables in markdown format to display
 - Ensure all content adheres to formatting guidelines.
 
-## Database Schema
+## Online Bookstore Database Schema
 
 ### Books Table
 
@@ -116,17 +114,16 @@
 | OrderCost       | DECIMAL(10, 2)  | Cost of the order.                               |
 | OrderDetails    | TEXT            | Details of the order.                            |
 
-## Feedback Table
+### Feedback Table
+| Column         | Data Type      | Description                                        |
+|----------------|----------------|------------------------------------------------    |
+| FeedbackID     | INT PRIMARY KEY| Unique ID for each feedback                        |
+| CustomerID     | INT            | ID of the customer (FK) referencing customer Table |
+| FeedbackDetails| TEXT           | Details of the feedback                            |
+| FeedbackType   | VARCHAR(255)   | Type of feedback (Complaint, Suggestion, Request)  |
+| FeedbackDate   | DATE           | Date of the feedback                               |
 
-| Column         | Data Type      | Description                                       |
-|----------------|----------------|------------------------------------------------   |
-| FeedbackID     | INT PRIMARY KEY| Unique ID for each feedback                       |
-| CustomerID     | INT            | ID of the customer (FK) referencing customer Table|
-| FeedbackDetails| TEXT           | Details of the feedback                           |
-| FeedbackType   | VARCHAR(255)   | Type of feedback (Complaint, Suggestion, Request) |
-| FeedbackDate   | DATE           | Date of the feedback                              |
-
-## SQL Table Creation Scripts
+## DB Creation Scripts
 
 ```sql
 CREATE TABLE Books (
@@ -288,4 +285,107 @@ LIMIT 1;
 ```sql
 SELECT Customers.CustomerName, Books.BookName, Reviews.ReviewComment, Reviews.Ratings, Reviews.ReviewDate FROM Reviews
 JOIN Customers ON Reviews.CustomerID = Customers.CustomerID JOIN Books ON Reviews.BookID = Books.BookID ORDER BY Reviews.ReviewDate DESC LIMIT 10;
+```
+## Typescript interface that will allow modification to a table- Choosen Reviews Table
+```sql
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'dbtesting',
+  password: '****',
+  port: 5432,
+});
+
+interface Review {
+  ReviewID: number;
+  BookID: number;
+  AuthorID: number;
+  CustomerID: number;
+  PublisherID: number;
+  ReviewComment: string;
+  Ratings: number;
+}
+
+async function createReview(review: Review) {
+  const query = `
+    INSERT INTO Reviews (ReviewID, BookID, AuthorID, CustomerID, PublisherID, ReviewComment, Ratings)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING *;
+  `;
+  const values = [
+    review.ReviewID, review.BookID, review.AuthorID, review.CustomerID,
+    review.PublisherID, review.ReviewComment, review.Ratings,
+  ];
+  const result = await pool.query(query, values);
+  return result.rows[0];
+}
+
+async function readReview(reviewID: number) {
+  const query = 'SELECT * FROM Reviews WHERE ReviewID = $1;';
+  const result = await pool.query(query, [reviewID]);
+  return result.rows[0];
+}
+
+async function updateReview(reviewID: number, updates: Partial<Review>) {
+  const fields = [];
+  const values = [reviewID];
+  let idx = 2;
+  for (const key in updates) {
+    fields.push(`${key} = $${idx}`);
+    values.push((updates as any)[key]);
+    idx++;
+  }
+
+  const query = `
+    UPDATE Reviews
+    SET ${fields.join(', ')}
+    WHERE ReviewID = $1
+    RETURNING *;
+  `;
+  const result = await pool.query(query, values);
+  return result.rows[0];
+}
+
+async function deleteReview(reviewID: number) {
+  const query = 'DELETE FROM Reviews WHERE ReviewID = $1 RETURNING *;';
+  const result = await pool.query(query, [reviewID]);
+  return result.rows[0];
+}
+
+async function main() {
+  try {
+    // Create a new review
+    const newReview: Review = {
+      ReviewID: 1,
+      BookID: 1,
+      AuthorID: 1,
+      CustomerID: 1,
+      PublisherID: 1,
+      ReviewComment: 'Great book!',
+      Ratings: 5,
+    };
+
+    const createdReview = await createReview(newReview);
+    console.log('Created Review:', createdReview);
+
+    // Read a review
+    const review = await readReview(1);
+    console.log('Read Review:', review);
+
+    // Update a review
+    const updatedReview = await updateReview(1, { ReviewComment: 'Excellent book!', Ratings: 4 });
+    console.log('Updated Review:', updatedReview);
+
+    // Delete a review
+    const deletedReview = await deleteReview(1);
+    console.log('Deleted Review:', deletedReview);
+  } catch (err) {
+    console.error('An error occurred:', err);
+  }
+}
+
+main().catch(err => console.error('Unexpected error occurred:', err));
+
 ```
