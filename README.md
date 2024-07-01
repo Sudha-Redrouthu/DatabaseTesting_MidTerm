@@ -1,5 +1,5 @@
 #  SENG8071- DatabaseTesting- Midterm Assignment
-## GitHub URL- https://github.com/Sudha-Redrouthu/DatabaseTesting_MidTerm/ 
+### GitHub URL- https://github.com/Sudha-Redrouthu/DatabaseTesting_MidTerm/ 
 # Team Responsibilities
 
 ## Member 1- karthik: SQL Implementation
