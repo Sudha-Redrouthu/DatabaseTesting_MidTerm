@@ -234,7 +234,7 @@ CREATE TABLE Reviews (
 ```sql
 ALTER TABLE Reviews ADD COLUMN ReviewTitle VARCHAR(100);
 ```
-### Alter
+### Drop
 ```sql
 DROP TABLE Reviews;
 ```
