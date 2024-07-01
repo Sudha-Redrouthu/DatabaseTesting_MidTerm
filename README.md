@@ -35,14 +35,15 @@
 - Ensure all content adheres to formatting guidelines.# DatabaseTesting_MidTerm
 ## Database Schema
 
-### Author Table
+### Authors Table
 
-| Column       | Data Type      | Description                |
-|--------------|----------------|----------------------------|
-| author_id    | INT PRIMARY KEY| Unique ID for each author  |
-| author_name  | VARCHAR(100)   | Name of the author         |
-| author_description  | TEXT           | Author's description       |
-| total_books  | INT            | Total number of books      |
+| Attribute       | Type            | Description                                      |
+|-----------------|-----------------|--------------------------------------------------|
+| AuthorID        | INT             | Primary key for identifying authors.             |
+| AuthorName      | VARCHAR(50)     | Name of the author.                              |
+| PrimaryGenre    | VARCHAR(50)     | Primary genre associated with the author         |
+| NoOfBooks       | INT             | Number of books authored by the author           |
+
 
 ### Genre Table
 
