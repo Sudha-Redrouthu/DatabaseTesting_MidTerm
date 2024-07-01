@@ -262,3 +262,30 @@ UPDATE Reviews SET ReviewComment = 'Excellent', Ratings = 4 WHERE ReviewID = 1;
 ```sql
 DELETE FROM Reviews WHERE ReviewID = 1;
 ```
+## Sql queries for the listed requirements. 
+### 1. Power writers with more than X books in the same genre published within the last X years 
+```sql
+SELECT Authors.AuthorID, Authors.AuthorName, Books.BookGenre, COUNT(Books.BookID) AS BooksPublished
+FROM Authors JOIN Books ON Authors.AuthorID = Books.AuthorID WHERE Books.BookPublishedDate >= CURRENT_DATE - INTERVAL '5 year'
+GROUP BY Authors.AuthorID, Authors.AuthorName, Books.BookGenre HAVING COUNT(Books.BookID) > 1;
+```
+### 2. Loyal Customers who has spent more than X dollars in the last year 
+```sql
+SELECT CustomerName, AmountSpent FROM Customers WHERE AmountSpent > 100 AND CustomerID IN (SELECT CustomerID 
+FROM Sales WHERE SaleDate > CURRENT_DATE - INTERVAL '2 year');
+```
+### 3. Well Reviewed books that has a better user rating than average
+```sql
+SELECT BookName, ROUND(AVG(Ratings), 2) AS AverageRating FROM Books JOIN Reviews ON Books.BookID = Reviews.BookID
+GROUP BY BookName HAVING AVG(Ratings) > (SELECT AVG(Ratings) FROM Reviews);
+```
+### 4. The most popular genre by sales
+```sql
+SELECT BookGenre, SUM(QuantitySold) AS TotalSales FROM Sales GROUP BY BookGenre ORDER BY TotalSales DESC
+LIMIT 1;
+```
+### 5. The 10 most recent posted reviews by Customers
+```sql
+SELECT Customers.CustomerName, Books.BookName, Reviews.ReviewComment, Reviews.Ratings, Reviews.ReviewDate FROM Reviews
+JOIN Customers ON Reviews.CustomerID = Customers.CustomerID JOIN Books ON Reviews.BookID = Books.BookID ORDER BY Reviews.ReviewDate DESC LIMIT 10;
+```
