@@ -33,33 +33,8 @@
   - Database tables and their attributes.
   - Data types and attribute descriptions.
 - Ensure all content adheres to formatting guidelines.# DatabaseTesting_MidTerm
+
 ## Database Schema
-
-### Authors Table
-
-| Attribute       | Type            | Description                                      |
-|-----------------|-----------------|--------------------------------------------------|
-| AuthorID        | INT             | Primary key for identifying authors.             |
-| AuthorName      | VARCHAR(50)     | Name of the author.                              |
-| PrimaryGenre    | VARCHAR(50)     | Primary genre associated with the author         |
-| NoOfBooks       | INT             | Number of books authored by the author           |
-
-
-### Genre Table
-
-| Column    | Data Type      | Description                |
-|-----------|----------------|----------------------------|
-| genre_id  | INT PRIMARY KEY| Unique ID for each genre   |
-| genre_name      | VARCHAR(50)   | Name of the genre          |
-| genre_description | TEXT         | Genre description          |
-
-### Publisher Table
-
-| Column       | Data Type      | Description                |
-|--------------|----------------|----------------------------|
-| publisher_id | INT PRIMARY KEY| Unique ID for each publisher|
-| publisher_name         | VARCHAR(50)   | Name of the publisher      |
-| publisher_address      | VARCHAR(100)   | Publisher's address        |
 
 ### Books Table
 
@@ -77,16 +52,41 @@
 | AuthorID            | INT                          | Foreign key referencing the Authors table.       |
 | PublisherID         | INT                          | Foreign key referencing the Publishers table.    |
 
-### Customer Table
+### Customers Table
 
-| Column          | Data Type      | Description                |
-|------------------|----------------|----------------------------|
-| customer_id      | INT PRIMARY KEY| Unique ID for each customer|
-| customer_name             | VARCHAR(100)   | Name of the customer       |
-| customer_email            | VARCHAR(100)   | Email of the customer      |
-| loyalty_points   | INT            | Loyalty points earned      |
-| membership_date  | DATE           | Date of membership         |
-| amount_spent     | DECIMAL(10,2)  | Total amount spent         |
+| Attribute        | Type            | Description                                      |
+|------------------|-----------------|--------------------------------------------------|
+| CustomerID       | INT             | Primary key for identifying customers.           |
+| CustomerName     | VARCHAR(50)     | Name of the customer.                            |
+| PurchaseHistory  | TEXT            | Details of the customer's purchase history.      |
+| AmountSpent      | DECIMAL(10, 2)  | Total amount spent by the customer               |
+| CustomerPhNo     | VARCHAR(15)     | Phone number of the customer.                    |
+| CustomerEmail    | VARCHAR(50)     | Unique email address of the customer.            |
+
+### Authors Table
+
+| Attribute       | Type            | Description                                      |
+|-----------------|-----------------|--------------------------------------------------|
+| AuthorID        | INT             | Primary key for identifying authors.             |
+| AuthorName      | VARCHAR(50)     | Name of the author.                              |
+| PrimaryGenre    | VARCHAR(50)     | Primary genre associated with the author         |
+| NoOfBooks       | INT             | Number of books authored by the author           |
+
+### Publishers Table
+
+| Attribute            | Type            | Description                                      |
+|----------------------|-----------------|--------------------------------------------------|
+| PublisherID          | INT             | Primary key for identifying publishers.          |
+| PublisherName        | VARCHAR(50)     | Name of the publisher.                           |
+| PublisherContactInfo | VARCHAR(100)    | Contact information for the publisher.           |
+
+### Genre Table
+
+| Column    | Data Type      | Description                |
+|-----------|----------------|----------------------------|
+| genre_id  | INT PRIMARY KEY| Unique ID for each genre   |
+| genre_name      | VARCHAR(50)   | Name of the genre          |
+| genre_description | TEXT         | Genre description          |
 
 ### Order Table
 
