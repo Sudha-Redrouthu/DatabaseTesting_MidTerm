@@ -125,6 +125,9 @@
 | FeedbackType   | VARCHAR(255)   | Type of feedback (Complaint, Suggestion, Request) |
 | FeedbackDate   | DATE           | Date of the feedback                              |
 
+## SQL Table Creation Script
+
+```sql
 CREATE TABLE Books (
     BookID INT PRIMARY KEY,
     BookName VARCHAR(50) NOT NULL,
@@ -134,13 +137,12 @@ CREATE TABLE Books (
     BookNoOfReviews INT DEFAULT 0,
     BookPublishedDate DATE,
     BookNoOfSales INT DEFAULT 0,
-    BookType ENUM('Physical', 'E-Book', 'Audiobook'),
+    BookType VARCHAR(10) CHECK (BookType IN ('Physical', 'E-Book', 'Audiobook')),
     AuthorID INT,
     PublisherID INT,
     FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID),
     FOREIGN KEY (PublisherID) REFERENCES Publishers(PublisherID)
 );
-
 
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY,
@@ -148,29 +150,26 @@ CREATE TABLE Customers (
     PurchaseHistory TEXT,
     AmountSpent DECIMAL(10, 2) DEFAULT 0.00,
     CustomerPhNo VARCHAR(15),
-    CustomerEmail VARCHAR(100) UNIQUE NOT NULL
+    CustomerEmail VARCHAR(50) UNIQUE NOT NULL
 );
-
 
 CREATE TABLE Publishers (
     PublisherID INT PRIMARY KEY,
-    PublisherName VARCHAR(150) NOT NULL,
-    PublisherContactInfo VARCHAR(150)
+    PublisherName VARCHAR(50) NOT NULL,
+    PublisherContactInfo VARCHAR(100)
 );
-
 
 CREATE TABLE Authors (
     AuthorID INT PRIMARY KEY,
-    AuthorName VARCHAR(150) NOT NULL,
-    PrimaryGenre VARCHAR(100),
+    AuthorName VARCHAR(50) NOT NULL,
+    PrimaryGenre VARCHAR(50),
     NoOfBooks INT DEFAULT 0
 );
-
 
 CREATE TABLE Sales (
     SaleID INT PRIMARY KEY,
     BookID INT,
-    BookGenre VARCHAR(100),
+    BookGenre VARCHAR(50),
     PublisherID INT,
     AuthorID INT,
     QuantitySold INT NOT NULL,
@@ -197,7 +196,6 @@ CREATE TABLE Reviews (
     FOREIGN KEY (PublisherID) REFERENCES Publishers(PublisherID)
 );
 
-
 CREATE TABLE Inventory (
     OrderID INT PRIMARY KEY,
     OrderDate DATE NOT NULL,
@@ -206,12 +204,12 @@ CREATE TABLE Inventory (
     ReceivedDate DATE
 );
 
-
 CREATE TABLE Feedback (
     FeedbackID INT PRIMARY KEY,
     CustomerID INT,
     FeedbackDetails TEXT,
-    FeedbackType ENUM('Complaint', 'Suggestion', 'Praise') NOT NULL,
+    FeedbackType VARCHAR(255) CHECK (FeedbackType IN ('Complaint', 'Suggestion', 'Request')) NOT NULL,
     FeedbackDate DATE NOT NULL,
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
+
