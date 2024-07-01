@@ -1,4 +1,38 @@
-# DatabaseTesting_MidTerm
+# Team Responsibilities
+
+## Member 1 karthik: SQL Implementation
+
+*Tasks:*
+- SQL Implementation
+- Data Modeling: Creating tables, relationships, and constraints.
+- Data Insertion: Adding initial data for testing or production use.
+- Implement CRUD operations for one table.
+- Ensure code readability and include code blocks in markdown.
+- Test SQL queries to confirm they meet project requirements.
+
+## Member 2- Sudha: Database Design, Code and Interface Development
+
+*Tasks:*
+- Define tables and attributes for the database.
+- Develop a TypeScript interface for modifying tables.
+- Create SQL queries for:
+  - Identifying Power Writers.
+  - Identifying Loyal Customers.
+  - Finding Well Reviewed books.
+  - Determining the most popular genre by sales.
+  - Retrieving the 10 most recent customer reviews.
+  
+## Member 3 Mohan: Developing SQL Code for Database Creation (DDL), Writing DML Statements and Documentation
+
+*Tasks:*
+- Develop SQL code for database creation (DDL).
+- Write DML statements to insert sample data.
+- Write the markdown document.
+- Organize the document with clear headers.
+- Create tables in markdown format to display:
+  - Database tables and their attributes.
+  - Data types and attribute descriptions.
+- Ensure all content adheres to formatting guidelines.# DatabaseTesting_MidTerm
 ## Database Schema
 
 ### Author Table
